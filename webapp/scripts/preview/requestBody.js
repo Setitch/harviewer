@@ -656,6 +656,16 @@ HtmlTab.prototype = domplate(HeadersTab.prototype,
             onDragOver: Lib.bind(this.onDragOver, this),
             onDrop: Lib.bind(this.onDrop, this)
         });
+
+        window.a = {preview: this.preview, that: this, file: this.file, strip: strip_tags};
+
+        // this.preview.contentWindow.document.body.innerHTML = window.a.file.response.content.text;
+            try {
+                let ev = new Event('filter-content-event');
+                ev . ownerData = {preview: this.preview, that: this, file: this.file};
+                window.document.dispatchEvent(ev);
+            } catch (e) {
+            }
     },
 
     onLoad: function(event)
